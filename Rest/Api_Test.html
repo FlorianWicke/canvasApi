@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  TEST api
+
+  <img src="" alt="" id="apiBild">
+</body>
+</html>
+
+<script>
+ let bild = "https:\/\/images.dog.ceo\/breeds\/dhole\/n02115913_2320.jpg"
+  //https://dog.ceo/api/breeds/image/random
+  let apiAntwort = {"message":"https:\/\/images.dog.ceo\/breeds\/dhole\/n02115913_2320.jpg","status":"success"}
+
+
+  async function getData() {
+  const url = "https://dog.ceo/api/breeds/image/random";
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+    const json = await response.json();
+    apiAntwort = json
+    document.getElementById("apiBild").src = apiAntwort.message
+    console.log(json);
+  } catch (error) {
+    console.error(error.message);
+  }
+
+}
+ getData();
+
+
+
+
+
+
+
+
+</script>

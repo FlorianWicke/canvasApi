@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <p id="activity"></p>
+  <p id="link"></p>
+  <p id="price"></p>
+  <p id="participants"></p>
+  <button onclick="getDataNew()">Hole Activity</button>
+  <p id="activityNew">dd</p>
+</body>
+</html>
+
+<script>
+ // https://bored.api.lewagon.com/
+
+let apiAntwort = {
+
+}
+let apiAntwortNew = {}
+const url = "https://bored.api.lewagon.com/api/activity/";
+
+async function getData() {
+  const url = "https://bored.api.lewagon.com/api/activity/";
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+    const json = await response.json();
+    apiAntwort = json
+    console.log(apiAntwort)
+ document.getElementById("activity").innerHTML = "Activity: " + apiAntwort.activity
+
+ if (apiAntwort.link) {
+  document.getElementById("link").innerHTML = "Link: " + apiAntwort.link
+ } else {
+  document.getElementById("link").innerHTML = "Kein Link vorhanden"
+ }
+
+ if (apiAntwort.price) {
+  document.getElementById("price").innerHTML = "Es kostet: " + apiAntwort.price +" EUR"
+ } else {
+  document.getElementById("price").innerHTML = "Es kostet nichts"
+ }
+
+ if (apiAntwort.participants) {
+  document.getElementById("participants").innerHTML = "Anzahl der Teilnehmer:" + apiAntwort.participants
+ }
+
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+async function getDataNew() {
+  const url = "https://bored.api.lewagon.com/api/activity/";
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+    const json = await response.json();
+    let apiAntwortNew = json
+
+ document.getElementById("activityNew").innerHTML = "Activity: " + apiAntwortNew.activity
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+ getData();
+
+
+  // Button : Hole Acitvity. Soll eine neue Acitvity laden (oben oder unten anzeigen)
+// und schreibe die alte unten ab. Und die neue oben rein!!
+</script>
